@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Drawing lines</title>
+		<style>
+			body { margin: 0; }
+			canvas { display: block; }
+    </style>
+	</head>
+	<body>
+		<script src="node_modules/three/build/three.min.js"></script>
+		<script>
+      // Create a scene
+      var scene = new THREE.Scene();
+
+      // Create a camera
+      var camera = new THREE.PerspectiveCamera(
+        45, // field of view (FOV)
+        window.innerWidth / window.innerHeight, // aspect ratio
+        1, // near
+        500 // far
+      );
+      // Set camera position to X:0 Y:0 Z:100
+      camera.position.set(0, 0, 100);
+      // Set camera to look at X:0 Y:0 Z:0
+      camera.lookAt(0, 0, 0);
+
+      // Create a renderer
+      var renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      // Add a renderer to the body
+      document.body.appendChild(renderer.domElement);
+
+      // Create a blue line material (LineBasicMaterial or LineDashedMaterial)
+      var material = new THREE.LineBasicMaterial({ color: 0x0000ff });
+
+      // Create geometry points (vertices)
+      var points = [];
+      points.push(new THREE.Vector3(-10, 0, 0));
+      points.push(new THREE.Vector3(0, 10, 0));
+      points.push(new THREE.Vector3(10, 0, 0));
+
+      // Create a geometry with the points
+      var geometry = new THREE.BufferGeometry().setFromPoints(points)
+
+      // Draw the lines
+      // Note: lines are drawn between each consecutive pair of vertices, but not between the first and last (the line is not closed.)
+      var line = new THREE.Line(geometry, material);
+
+      // Put a line on the scene
+      scene.add(line);
+
+      // Render the scene
+      renderer.render(scene, camera);
+		</script>
+	</body>
+</html>
