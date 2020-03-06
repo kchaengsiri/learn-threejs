@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Gird</title>
+		<style>
+			body { margin: 0; }
+			canvas { display: block; }
+    </style>
+	</head>
+	<body>
+		<script src="node_modules/three/build/three.min.js"></script>
+		<script>
+      var width = window.innerWidth;
+      var height = window.innerHeight;
+
+      // Create a scene
+      var scene = new THREE.Scene();
+
+      // Create a camera
+      // PerspectiveCamera(fieldOfView, aspectRatio, near, far)
+      var camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
+      camera.position.set(0, 100, 100);
+      camera.lookAt(scene.position);
+
+      // Create a renderer
+      var renderer = new THREE.WebGLRenderer();
+      renderer.setSize(width, height);
+      // Add a renderer to the body
+      document.body.appendChild(renderer.domElement);
+
+      // Create a grid geometry
+      // var geometry = new THREE.Geometry();
+
+      // // Create grid lines
+      // var size = 20;
+      // var step = 1;
+      // var length = 0.04;
+      // for (var i = -size; i <= size; i += step) {
+      //   // Vector3( x : Float, y : Float, z : Float )
+      //   console.log(-size, -length, i)
+      //   console.log(size, -length, i)
+      //   console.log(i, -length, -size)
+      //   console.log(i, -length, size)
+      //   console.log('===================')
+      //   geometry.vertices.push(new THREE.Vector3(-size, -length, i));
+      //   geometry.vertices.push(new THREE.Vector3(size, -length, i));
+
+      //   geometry.vertices.push(new THREE.Vector3(i, -length, -size));
+      //   geometry.vertices.push(new THREE.Vector3(i, -length, size));
+      // }
+
+      // // Create a grid line material
+      // var material = new THREE.LineBasicMaterial({ color: 'white' })
+
+      // // Create a grid
+      // var line = new THREE.Line(geometry, material, THREE.LineSegments);
+
+      // // Add a grid to the scene
+      // scene.add(line);
+
+      // Add a grid to the scene
+      var grid = new THREE.GridHelper(100, 10);
+      scene.add(grid);
+
+      // Render the scene
+      renderer.render(scene, camera);
+		</script>
+	</body>
+</html>
